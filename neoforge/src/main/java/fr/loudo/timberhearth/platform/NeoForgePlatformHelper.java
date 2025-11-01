@@ -1,6 +1,6 @@
-package com.example.examplemod.platform;
+package fr.loudo.timberhearth.platform;
 
-import com.example.examplemod.platform.services.IPlatformHelper;
+import fr.loudo.timberhearth.platform.services.IPlatformHelper;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
 

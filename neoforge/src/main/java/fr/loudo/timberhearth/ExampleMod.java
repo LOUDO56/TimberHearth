@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package fr.loudo.timberhearth;
 
 
 import net.neoforged.bus.api.IEventBus;
