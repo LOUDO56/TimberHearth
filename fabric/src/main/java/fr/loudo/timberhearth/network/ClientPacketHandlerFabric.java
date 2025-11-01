@@ -9,6 +9,8 @@ public class ClientPacketHandlerFabric {
         ClientPlayNetworking.registerGlobalReceiver(
                 PlayTimberHearthSoundS2C.TYPE, (payload, context) -> TimberHearthSoundControl.play());
         ClientPlayNetworking.registerGlobalReceiver(
+                StopTimberHearthSoundS2C.TYPE, (payload, context) -> TimberHearthSoundControl.stop());
+        ClientPlayNetworking.registerGlobalReceiver(
                 TimberHearthFadeSoundS2C.TYPE,
                 (payload, context) -> TimberHearthSoundControl.reset(payload.flag(), payload.soundType()));
     }
