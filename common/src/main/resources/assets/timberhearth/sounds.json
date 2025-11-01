@@ -1,0 +1,12 @@
+{
+  "timber_hearth": {
+    "category": "ambiant",
+    "sounds": [
+      {
+        "name": "timberhearth:timber_hearth",
+        "volume": 0.3,
+        "preload": true
+      }
+    ]
+  }
+}
