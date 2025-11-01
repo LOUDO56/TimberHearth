@@ -1,0 +1,21 @@
+package fr.loudo.timberhearth.mixin;
+
+import fr.loudo.timberhearth.audio.VolumeAudio;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.sounds.SoundEngine;
+import net.minecraft.client.sounds.SoundManager;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+
+@Mixin(SoundManager.class)
+public class SoundManagerMixin implements VolumeAudio {
+    @Shadow
+    @Final
+    private SoundEngine soundEngine;
+
+    @Override
+    public void timberHearth$setVolume(SoundInstance soundInstance, float volume) {
+        ((VolumeAudio) this.soundEngine).timberHearth$setVolume(soundInstance, volume);
+    }
+}
