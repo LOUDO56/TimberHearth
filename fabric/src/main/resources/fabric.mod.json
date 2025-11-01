@@ -17,6 +17,9 @@
     "entrypoints": {
         "main": [
           "fr.loudo.timberhearth.TimberHearthFabric"
+        ],
+        "client": [
+          "fr.loudo.timberhearth.TimberHearthFabricClient"
         ]
     },
     "mixins": [

@@ -31,7 +31,6 @@ public abstract class ServerLevelMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;setDayTime(J)V"))
     private void timerHeart$overrideTickTime(ServerLevel instance, long time) {
         if (time % 24000L >= 23998 || time % 24000L <= 1) {
-            if (instance.getLevel().isRaining() || instance.getLevel().isThundering()) return;
             server.getPlayerList()
                     .getPlayers()
                     .forEach(player -> Services.PACKET_SENDER.sendToPlayer(player, new PlayTimberHearthSoundS2C()));

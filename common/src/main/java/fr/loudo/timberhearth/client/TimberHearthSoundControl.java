@@ -3,6 +3,7 @@ package fr.loudo.timberhearth.client;
 import fr.loudo.timberhearth.sound.ModSounds;
 import fr.loudo.timberhearth.util.UtilClient;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
@@ -50,7 +51,12 @@ public class TimberHearthSoundControl {
     }
 
     public static void play() {
+        soundManager.stop(TIMBER_HEARTH_INSTANCE);
         soundManager.play(TIMBER_HEARTH_INSTANCE);
+        ClientLevel level = Minecraft.getInstance().level;
+        if (level.isRaining() || level.isThundering()) {
+            soundManager.setVolume(TIMBER_HEARTH_INSTANCE, 0.0f);
+        }
     }
 
     public static boolean in() {
