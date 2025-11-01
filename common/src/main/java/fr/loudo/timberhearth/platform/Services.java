@@ -1,12 +1,14 @@
 package fr.loudo.timberhearth.platform;
 
 import fr.loudo.timberhearth.TimberHearth;
+import fr.loudo.timberhearth.platform.services.IPacketSender;
 import fr.loudo.timberhearth.platform.services.IPlatformHelper;
 import java.util.ServiceLoader;
 
 public class Services {
 
     public static final IPlatformHelper PLATFORM = load(IPlatformHelper.class);
+    public static final IPacketSender PACKET_SENDER = load(IPacketSender.class);
 
     public static <T> T load(Class<T> clazz) {
 

@@ -11,8 +11,8 @@ import net.minecraft.util.Mth;
 
 public class TimberHearthSoundControl {
 
-    private static final SoundInstance TIMBER_HEARTH_INSTANCE =
-            SimpleSoundInstance.forUI(SoundEvent.createVariableRangeEvent(ModSounds.TIMBER_HEARTH), 0.3f, 1.0f);
+    private static final SoundInstance TIMBER_HEARTH_INSTANCE = SimpleSoundInstance.forLocalAmbience(
+            SoundEvent.createVariableRangeEvent(ModSounds.TIMBER_HEARTH), 1.0f, 0.3f);
     private static final SoundManager soundManager = Minecraft.getInstance().getSoundManager();
 
     private static final int TOTAL_TICK_RAIN = (int) (5.0 * 20.0);
@@ -33,7 +33,7 @@ public class TimberHearthSoundControl {
         }
     }
 
-    public static SoundType currentSoundType = SoundType.CAVE;
+    private static SoundType currentSoundType = SoundType.CAVE;
     private static boolean flag;
     private static int tick;
     private static float currentVolume, breakVolumePoint;
@@ -59,6 +59,14 @@ public class TimberHearthSoundControl {
 
     public static boolean out() {
         return !TimberHearthSoundControl.flag;
+    }
+
+    public static boolean currentRain() {
+        return currentSoundType == SoundType.RAIN;
+    }
+
+    public static boolean currentCave() {
+        return currentSoundType == SoundType.CAVE;
     }
 
     public static boolean isTransitioning() {

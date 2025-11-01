@@ -16,7 +16,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-          "fr.loudo.timberhearth.ExampleMod"
+          "fr.loudo.timberhearth.TimberHearthFabric"
         ]
     },
     "mixins": [

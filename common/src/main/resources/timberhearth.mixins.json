@@ -8,10 +8,7 @@
     "MinecraftServerMixin",
     "ServerLevelMixin"
   ],
-  "client": [
-    "accessor.SoundEngineAccessor",
-    "accessor.SoundManagerAccessor"
-  ],
+  "client": [],
   "server": [],
   "injectors": {
     "defaultRequire": 1

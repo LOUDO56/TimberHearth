@@ -1,15 +1,11 @@
 package fr.loudo.timberhearth.mixin;
 
 import fr.loudo.timberhearth.client.TimberHearthSoundControl;
-import fr.loudo.timberhearth.sound.ModSounds;
-import net.minecraft.core.Holder;
-import net.minecraft.network.protocol.game.ClientboundSoundPacket;
-import net.minecraft.network.protocol.game.ClientboundStopSoundPacket;
+import fr.loudo.timberhearth.network.PlayTimberHearthSoundS2C;
+import fr.loudo.timberhearth.network.TimberHearthFadeSoundS2C;
+import fr.loudo.timberhearth.platform.Services;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.storage.ServerLevelData;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,26 +22,19 @@ public abstract class ServerLevelMixin {
     @Final
     private ServerLevelData serverLevelData;
 
+    @Shadow
+    @Final
+    private MinecraftServer server;
+
     @Redirect(
             method = "tickTime",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;setDayTime(J)V"))
     private void timerHeart$overrideTickTime(ServerLevel instance, long time) {
-        if (time % 24000L >= 23998 || time % 24000L <= 1 && (!instance.getLevel().isRaining() && instance.getLevel().isThundering())) {
-            instance.getServer()
-                    .getPlayerList()
-                    .broadcastAll(new ClientboundStopSoundPacket(ModSounds.TIMBER_HEARTH, SoundSource.AMBIENT));
-            Holder<SoundEvent> holder = Holder.direct(SoundEvent.createVariableRangeEvent(ModSounds.TIMBER_HEARTH));
-            instance.getServer()
-                    .getPlayerList()
-                    .broadcastAll(new ClientboundSoundPacket(
-                            holder,
-                            SoundSource.AMBIENT,
-                            0,
-                            0,
-                            0,
-                            0.3f,
-                            1.0f,
-                            instance.getRandom().nextLong()));
+        if (time % 24000L >= 23998 || time % 24000L <= 1) {
+            if (instance.getLevel().isRaining() || instance.getLevel().isThundering()) return;
+            server.getPlayerList()
+                    .getPlayers()
+                    .forEach(player -> Services.PACKET_SENDER.sendToPlayer(player, new PlayTimberHearthSoundS2C()));
         }
         instance.setDayTime(instance.getDayTime() + 3L);
         instance.getServer().forceTimeSynchronization();
@@ -59,6 +48,9 @@ public abstract class ServerLevelMixin {
         if (!flag && (!this.serverLevelData.isRaining() && !this.serverLevelData.isThundering())) {
             return;
         }
-        TimberHearthSoundControl.reset(flag, TimberHearthSoundControl.SoundType.RAIN);
+        server.getPlayerList()
+                .getPlayers()
+                .forEach(player -> Services.PACKET_SENDER.sendToPlayer(
+                        player, new TimberHearthFadeSoundS2C(flag, TimberHearthSoundControl.SoundType.RAIN)));
     }
 }

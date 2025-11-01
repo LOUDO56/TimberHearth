@@ -12,8 +12,7 @@ public class OnClientTick {
         TimberHearthSoundControl.tick();
         if (minecraft.player == null || minecraft.level == null) return;
         boolean canTrigger = (!minecraft.level.isRaining() && !minecraft.level.isThundering())
-                || TimberHearthSoundControl.currentSoundType == TimberHearthSoundControl.SoundType.RAIN
-                        && TimberHearthSoundControl.out();
+                || TimberHearthSoundControl.currentRain() && TimberHearthSoundControl.out();
         boolean inCave = UtilClient.inCave();
         if (inCave && !wasCave) {
             wasCave = true;
