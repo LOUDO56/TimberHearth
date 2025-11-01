@@ -4,10 +4,7 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import fr.loudo.timberhearth.network.StopTimberHearthSoundS2C;
 import fr.loudo.timberhearth.platform.Services;
-import fr.loudo.timberhearth.sound.ModSounds;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.network.protocol.game.ClientboundStopSoundPacket;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,7 +17,8 @@ public class GameRulesMixin {
     @Inject(method = "updateFromArgument", at = @At("HEAD"))
     private void timberHeart$onGameRuleChanged(
             CommandContext<CommandSourceStack> context, String paramName, CallbackInfo ci) {
-        if (paramName.equalsIgnoreCase("doDaylightCycle") && !BoolArgumentType.getBool(context, paramName)) {
+        String param = context.getInput().split(" ")[1];
+        if (param.equalsIgnoreCase("doDaylightCycle") && !BoolArgumentType.getBool(context, paramName)) {
             context.getSource()
                     .getServer()
                     .getPlayerList()
