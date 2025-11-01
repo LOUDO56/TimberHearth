@@ -51,12 +51,16 @@ public class TimberHearthSoundControl {
     }
 
     public static void play() {
-        soundManager.stop(TIMBER_HEARTH_INSTANCE);
+        stop();
         soundManager.play(TIMBER_HEARTH_INSTANCE);
         ClientLevel level = Minecraft.getInstance().level;
         if (level.isRaining() || level.isThundering()) {
             soundManager.setVolume(TIMBER_HEARTH_INSTANCE, 0.0f);
         }
+    }
+
+    public static void stop() {
+        soundManager.stop(TIMBER_HEARTH_INSTANCE);
     }
 
     public static boolean in() {

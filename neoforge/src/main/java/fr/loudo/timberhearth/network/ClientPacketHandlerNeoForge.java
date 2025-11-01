@@ -10,6 +10,11 @@ public class ClientPacketHandlerNeoForge {
         context.enqueueWork(TimberHearthSoundControl::play);
     }
 
+    public static void handleStopTimberHearthSound(
+            final StopTimberHearthSoundS2C packet, final IPayloadContext context) {
+        context.enqueueWork(TimberHearthSoundControl::stop);
+    }
+
     public static void handleTimberHearthFadeSound(
             final TimberHearthFadeSoundS2C packet, final IPayloadContext context) {
         context.enqueueWork(() -> TimberHearthSoundControl.reset(packet.flag(), packet.soundType()));
