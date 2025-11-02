@@ -18,6 +18,6 @@ public class ServerPlayerFabric {
     private void timberHeart$fabricChangeDimensionEvent(
             TeleportTransition teleportTransition, CallbackInfoReturnable<ServerPlayer> cir) {
         OnChangeDimensionEvent.changeDimensionEvent(
-                teleportTransition.newLevel().dimension());
+                teleportTransition.newLevel().dimension(), cir.getReturnValue());
     }
 }

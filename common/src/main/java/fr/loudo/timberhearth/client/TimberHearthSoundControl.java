@@ -20,11 +20,13 @@ public class TimberHearthSoundControl {
 
     private static final int TOTAL_TICK_RAIN = (int) (5.0 * 20.0);
     private static final int TOTAL_TICK_JOIN = (int) (2.0 * 20.0);
+    private static final int TOTAL_TICK_DIMENSION = (int) (5.0 * 20.0);
     private static final int TOTAL_TICK_CAVE = (int) (3.0 * 20.0);
 
     public enum SoundType {
         RAIN(TOTAL_TICK_RAIN),
         JOIN(TOTAL_TICK_JOIN),
+        DIMENSION(TOTAL_TICK_DIMENSION),
         CAVE(TOTAL_TICK_CAVE);
 
         private final int totalTick;
@@ -57,7 +59,7 @@ public class TimberHearthSoundControl {
                         Minecraft.getInstance().level,
                         Minecraft.getInstance().player.blockPosition())) return;
         tick = 0;
-        if (type == SoundType.JOIN) {
+        if (type == SoundType.JOIN || type == SoundType.DIMENSION) {
             SOUND_MANAGER.setVolume(TIMBER_HEARTH_INSTANCE, 0.0f);
         }
     }
@@ -112,8 +114,7 @@ public class TimberHearthSoundControl {
         if (tick >= currentSoundType.getTotalTick()) return;
 
         if (!SOUND_MANAGER.isActive(TIMBER_HEARTH_INSTANCE)) {
-            play(UtilCommon.getOSTSecondsFromDayTime(
-                    Minecraft.getInstance().level.getDayTime()));
+            return;
         }
 
         double t = Mth.clamp((tick + partialTick) / currentSoundType.getTotalTick(), 0.0, 1.0);

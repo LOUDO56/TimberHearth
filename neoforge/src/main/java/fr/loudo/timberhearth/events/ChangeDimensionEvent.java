@@ -1,6 +1,7 @@
 package fr.loudo.timberhearth.events;
 
 import fr.loudo.timberhearth.TimberHearth;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
@@ -13,6 +14,6 @@ public class ChangeDimensionEvent {
     }
 
     private static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
-        OnChangeDimensionEvent.changeDimensionEvent(event.getTo());
+        OnChangeDimensionEvent.changeDimensionEvent(event.getTo(), (ServerPlayer) event.getEntity());
     }
 }

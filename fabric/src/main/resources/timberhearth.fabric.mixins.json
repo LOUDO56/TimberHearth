@@ -4,10 +4,11 @@
   "package": "fr.loudo.timberhearth.mixin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
-  "client": [
-    "LevelRendererMixin",
+  "mixins": [
     "ServerPlayerFabric"
+  ],
+  "client": [
+    "LevelRendererMixin"
   ],
   "server": [],
   "injectors": {
