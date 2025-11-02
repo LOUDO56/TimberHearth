@@ -47,6 +47,9 @@ public abstract class ServerLevelMixin {
         if (!flag && (!this.serverLevelData.isRaining() && !this.serverLevelData.isThundering())) {
             return;
         }
+        if (flag && (this.serverLevelData.isRaining() || this.serverLevelData.isThundering())) {
+            return;
+        }
         server.getPlayerList()
                 .getPlayers()
                 .forEach(player -> Services.PACKET_SENDER.sendToPlayer(
