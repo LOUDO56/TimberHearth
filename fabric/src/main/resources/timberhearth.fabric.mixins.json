@@ -6,7 +6,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
   "client": [
-    "LevelRendererMixin"
+    "LevelRendererMixin",
+    "ServerPlayerFabric"
   ],
   "server": [],
   "injectors": {
