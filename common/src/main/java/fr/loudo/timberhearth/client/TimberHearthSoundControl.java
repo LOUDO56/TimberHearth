@@ -44,12 +44,6 @@ public class TimberHearthSoundControl {
 
     public static void reset(boolean flag, SoundType type) {
         breakVolumePoint = -1f;
-        // shitty condition I know, just prevent fade if it already rains
-        if (type == SoundType.RAIN
-                && flag
-                && TimberHearthSoundControl.flag
-                && currentSoundType == SoundType.RAIN
-                && tick == currentSoundType.totalTick) return;
         if (!UtilCommon.isDayTime(Minecraft.getInstance().level.getDayTime())) return;
         TimberHearthSoundControl.flag = flag;
         currentSoundType = type;
@@ -61,6 +55,9 @@ public class TimberHearthSoundControl {
                         Minecraft.getInstance().level,
                         Minecraft.getInstance().player.blockPosition())) return;
         tick = 0;
+        if (type == SoundType.JOIN) {
+            ((VolumeAudio)SOUND_MANAGER).timberHearth$setVolume(TIMBER_HEARTH_INSTANCE, 0.0f);
+        }
     }
 
     public static void play(double seconds) {

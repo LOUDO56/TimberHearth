@@ -23,6 +23,7 @@ public class ScreenMixin {
             if (UtilCommon.inCave(minecraft.level, minecraft.player.blockPosition())
                     || minecraft.level.isRaining()
                     || minecraft.level.isThundering()) {
+                if (TimberHearthSoundControl.isTransitioning()) return;
                 TimberHearthSoundControl.stop();
             }
         }
