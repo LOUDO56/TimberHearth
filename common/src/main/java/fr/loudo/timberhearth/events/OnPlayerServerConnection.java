@@ -10,7 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 public class OnPlayerServerConnection {
     public static void playerJoin(ServerPlayer player) {
-        ServerLevel level = player.level();
+        ServerLevel level = (ServerLevel) player.level();
         if (UtilCommon.inCave(player.level(), player.blockPosition())) return;
         if (UtilCommon.isDayTime(level.getDayTime()) && !level.isRaining() && !level.isThundering()) {
             double secondsToPlay = UtilCommon.getOSTSecondsFromDayTime(level.getDayTime());

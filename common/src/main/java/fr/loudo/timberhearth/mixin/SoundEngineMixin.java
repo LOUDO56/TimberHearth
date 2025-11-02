@@ -3,6 +3,8 @@ package fr.loudo.timberhearth.mixin;
 import fr.loudo.timberhearth.audio.ChannelExtension;
 import fr.loudo.timberhearth.audio.SoundExtension;
 import java.util.Map;
+
+import fr.loudo.timberhearth.audio.VolumeAudio;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.ChannelAccess;
 import net.minecraft.client.sounds.SoundEngine;
@@ -11,13 +13,19 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(SoundEngine.class)
-public abstract class SoundEngineMixin implements SoundExtension {
+public abstract class SoundEngineMixin implements SoundExtension, VolumeAudio {
     @Shadow
     @Final
     private Map<SoundInstance, ChannelAccess.ChannelHandle> instanceToChannel;
 
     @Shadow
-    public abstract SoundEngine.PlayResult play(SoundInstance p_sound);
+    public abstract void play(SoundInstance p_sound);
+
+    @Shadow
+    private boolean loaded;
+
+    @Shadow
+    protected abstract float calculateVolume(SoundInstance sound);
 
     @Override
     public void timberHearth$playAt(SoundInstance soundInstance, double seconds) {
@@ -26,6 +34,17 @@ public abstract class SoundEngineMixin implements SoundExtension {
         if (channelaccess$channelhandle != null) {
             channelaccess$channelhandle.execute(
                     channel -> ((ChannelExtension) channel).timberHearth$playAt((float) seconds));
+        }
+    }
+
+    // Code owned by Mojang.
+    @Override
+    public void timberHearth$setVolume(SoundInstance soundInstance, float volume) {
+        if (this.loaded) {
+            ChannelAccess.ChannelHandle channelHandle = this.instanceToChannel.get(soundInstance);
+            if (channelHandle != null) {
+                channelHandle.execute((channel) -> channel.setVolume(volume * this.calculateVolume(soundInstance)));
+            }
         }
     }
 }

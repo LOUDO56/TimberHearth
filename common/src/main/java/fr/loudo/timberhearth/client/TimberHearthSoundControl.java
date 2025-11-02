@@ -1,6 +1,7 @@
 package fr.loudo.timberhearth.client;
 
 import fr.loudo.timberhearth.audio.SoundExtension;
+import fr.loudo.timberhearth.audio.VolumeAudio;
 import fr.loudo.timberhearth.sound.ModSounds;
 import fr.loudo.timberhearth.util.UtilCommon;
 import net.minecraft.client.Minecraft;
@@ -67,7 +68,7 @@ public class TimberHearthSoundControl {
         ((SoundExtension) SOUND_MANAGER).timberHearth$playAt(TIMBER_HEARTH_INSTANCE, seconds);
         ClientLevel level = Minecraft.getInstance().level;
         if (level.isRaining() || level.isThundering()) {
-            SOUND_MANAGER.setVolume(TIMBER_HEARTH_INSTANCE, 0.0f);
+            ((VolumeAudio)SOUND_MANAGER).timberHearth$setVolume(TIMBER_HEARTH_INSTANCE, 0.0f);
         }
     }
 
@@ -116,7 +117,7 @@ public class TimberHearthSoundControl {
         if (volume == 1.0f || volume == 0.0f) {
             breakVolumePoint = -1f;
         }
-        SOUND_MANAGER.setVolume(TIMBER_HEARTH_INSTANCE, volume);
+        ((VolumeAudio)SOUND_MANAGER).timberHearth$setVolume(TIMBER_HEARTH_INSTANCE, volume);
     }
 
     private static float calculateVolume(double t) {
