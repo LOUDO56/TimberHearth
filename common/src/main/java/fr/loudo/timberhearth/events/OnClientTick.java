@@ -9,6 +9,10 @@ public class OnClientTick {
     private static boolean wasCave;
 
     public static void tick(Minecraft minecraft) {
+        if (minecraft.player == null) {
+            TimberHearthSoundControl.disconnect();
+            return;
+        }
         TimberHearthSoundControl.tick();
         if (minecraft.player == null || minecraft.level == null) return;
         boolean canTrigger = (!minecraft.level.isRaining() && !minecraft.level.isThundering())
