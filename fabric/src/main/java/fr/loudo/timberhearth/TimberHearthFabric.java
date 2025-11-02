@@ -1,6 +1,7 @@
 package fr.loudo.timberhearth;
 
 import fr.loudo.timberhearth.registers.PayloadRegister;
+import fr.loudo.timberhearth.registers.ServerEventsRegister;
 import net.fabricmc.api.ModInitializer;
 
 public class TimberHearthFabric implements ModInitializer {
@@ -9,5 +10,6 @@ public class TimberHearthFabric implements ModInitializer {
     public void onInitialize() {
         CommonClass.init();
         PayloadRegister.register();
+        ServerEventsRegister.register();
     }
 }

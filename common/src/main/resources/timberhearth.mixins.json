@@ -6,9 +6,16 @@
   "compatibilityLevel": "JAVA_18",
   "mixins": [
     "MinecraftServerMixin",
-    "ServerLevelMixin"
+    "ServerLevelMixin",
+    "TickCommandMixin",
+    "TimeCommandMixin"
   ],
-  "client": [],
+  "client": [
+    "ChannelMixin",
+    "ScreenMixin",
+    "SoundEngineMixin",
+    "SoundManagerMixin"
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1

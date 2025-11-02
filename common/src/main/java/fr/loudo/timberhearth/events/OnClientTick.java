@@ -1,7 +1,7 @@
 package fr.loudo.timberhearth.events;
 
 import fr.loudo.timberhearth.client.TimberHearthSoundControl;
-import fr.loudo.timberhearth.util.UtilClient;
+import fr.loudo.timberhearth.util.UtilCommon;
 import net.minecraft.client.Minecraft;
 
 public class OnClientTick {
@@ -13,7 +13,7 @@ public class OnClientTick {
         if (minecraft.player == null || minecraft.level == null) return;
         boolean canTrigger = (!minecraft.level.isRaining() && !minecraft.level.isThundering())
                 || TimberHearthSoundControl.currentRain() && TimberHearthSoundControl.out();
-        boolean inCave = UtilClient.inCave();
+        boolean inCave = UtilCommon.inCave(minecraft.level, minecraft.player.blockPosition());
         if (inCave && !wasCave) {
             wasCave = true;
             if (canTrigger) {
