@@ -10,6 +10,7 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.Level;
 
 public class TimberHearthSoundControl {
 
@@ -44,6 +45,7 @@ public class TimberHearthSoundControl {
 
     public static void reset(boolean flag, SoundType type) {
         breakVolumePoint = -1f;
+        if (Minecraft.getInstance().player.level().dimension() != Level.OVERWORLD) return;
         if (!UtilCommon.isDayTime(Minecraft.getInstance().level.getDayTime())) return;
         TimberHearthSoundControl.flag = flag;
         currentSoundType = type;

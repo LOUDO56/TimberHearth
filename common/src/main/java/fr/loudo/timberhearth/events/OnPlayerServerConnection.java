@@ -7,10 +7,12 @@ import fr.loudo.timberhearth.platform.Services;
 import fr.loudo.timberhearth.util.UtilCommon;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.GameRules;
 
 public class OnPlayerServerConnection {
     public static void playerJoin(ServerPlayer player) {
         ServerLevel level = player.level();
+        if (!level.getGameRules().getBoolean(GameRules.RULE_DAYLIGHT)) return;
         if (UtilCommon.inCave(player.level(), player.blockPosition())) return;
         if (UtilCommon.isDayTime(level.getDayTime()) && !level.isRaining() && !level.isThundering()) {
             double secondsToPlay = UtilCommon.getOSTSecondsFromDayTime(level.getDayTime());
