@@ -8,10 +8,12 @@ import fr.loudo.timberhearth.util.UtilCommon;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
 
 public class OnPlayerServerConnection {
     public static void playerJoin(ServerPlayer player) {
         ServerLevel level = (ServerLevel) player.level();
+        if (level.dimension() != Level.OVERWORLD) return;
         if (!level.getGameRules().getBoolean(GameRules.RULE_DAYLIGHT)) return;
         if (UtilCommon.inCave(player.level(), player.blockPosition())) return;
         if (UtilCommon.isDayTime(level.getDayTime()) && !level.isRaining() && !level.isThundering()) {
