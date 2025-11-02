@@ -110,7 +110,7 @@ public class TimberHearthSoundControl {
     }
 
     public static void fade(float partialTick) {
-        if (tick == currentSoundType.getTotalTick()) return;
+        if (tick >= currentSoundType.getTotalTick()) return;
 
         if (!SOUND_MANAGER.isActive(TIMBER_HEARTH_INSTANCE)) {
             play(UtilCommon.getOSTSecondsFromDayTime(
