@@ -2,9 +2,8 @@ package fr.loudo.timberhearth.mixin;
 
 import fr.loudo.timberhearth.audio.ChannelExtension;
 import fr.loudo.timberhearth.audio.SoundExtension;
-import java.util.Map;
-
 import fr.loudo.timberhearth.audio.VolumeAudio;
+import java.util.Map;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.ChannelAccess;
 import net.minecraft.client.sounds.SoundEngine;
