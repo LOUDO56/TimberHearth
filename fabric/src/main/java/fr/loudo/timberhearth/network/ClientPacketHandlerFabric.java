@@ -7,7 +7,7 @@ public class ClientPacketHandlerFabric {
 
     public static void handle() {
         ClientPlayNetworking.registerGlobalReceiver(
-                PlayTimberHearthSoundS2C.TYPE, (payload, context) -> TimberHearthSoundControl.play());
+                PlayTimberHearthSoundS2C.TYPE, (payload, context) -> TimberHearthSoundControl.play(payload.seconds()));
         ClientPlayNetworking.registerGlobalReceiver(
                 StopTimberHearthSoundS2C.TYPE, (payload, context) -> TimberHearthSoundControl.stop());
         ClientPlayNetworking.registerGlobalReceiver(

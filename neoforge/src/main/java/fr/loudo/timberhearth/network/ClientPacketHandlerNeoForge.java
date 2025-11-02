@@ -7,7 +7,7 @@ public class ClientPacketHandlerNeoForge {
 
     public static void handlePlayTimberHearthSound(
             final PlayTimberHearthSoundS2C packet, final IPayloadContext context) {
-        context.enqueueWork(TimberHearthSoundControl::play);
+        context.enqueueWork(() -> TimberHearthSoundControl.play(packet.seconds()));
     }
 
     public static void handleStopTimberHearthSound(

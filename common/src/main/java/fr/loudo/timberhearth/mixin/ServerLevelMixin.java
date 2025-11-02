@@ -33,7 +33,7 @@ public abstract class ServerLevelMixin {
         if (time % 24000L >= 23998 || time % 24000L <= 1) {
             server.getPlayerList()
                     .getPlayers()
-                    .forEach(player -> Services.PACKET_SENDER.sendToPlayer(player, new PlayTimberHearthSoundS2C()));
+                    .forEach(player -> Services.PACKET_SENDER.sendToPlayer(player, new PlayTimberHearthSoundS2C(0)));
         }
         instance.setDayTime(instance.getDayTime() + 3L);
         instance.getServer().forceTimeSynchronization();
