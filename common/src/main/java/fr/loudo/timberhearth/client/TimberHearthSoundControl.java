@@ -57,8 +57,13 @@ public class TimberHearthSoundControl {
                         Minecraft.getInstance().player.blockPosition())) return;
         tick = 0;
         if (type == SoundType.JOIN) {
-            ((VolumeAudio)SOUND_MANAGER).timberHearth$setVolume(TIMBER_HEARTH_INSTANCE, 0.0f);
+            SOUND_MANAGER.setVolume(TIMBER_HEARTH_INSTANCE, 0.0f);
         }
+    }
+
+    public static void disconnect() {
+        breakVolumePoint = -1f;
+        tick = SoundType.RAIN.totalTick;
     }
 
     public static void play(double seconds) {
