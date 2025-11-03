@@ -56,12 +56,12 @@ public class TimberHearthSoundControl {
             breakVolumePoint = currentVolume;
         }
         if (type == SoundType.RAIN
-                && UtilCommon.inCave(
-                        level,
-                        Minecraft.getInstance().player.blockPosition())) return;
+                && UtilCommon.inCave(level, Minecraft.getInstance().player.blockPosition())) return;
         tick = 0;
         if (!SOUND_MANAGER.isActive(TIMBER_HEARTH_INSTANCE)) {
-            ((SoundExtension) SOUND_MANAGER).timberHearth$playAt(TIMBER_HEARTH_INSTANCE, UtilCommon.getOSTSecondsFromDayTime(level.getDayTime()));
+            ((SoundExtension) SOUND_MANAGER)
+                    .timberHearth$playAt(
+                            TIMBER_HEARTH_INSTANCE, UtilCommon.getOSTSecondsFromDayTime(level.getDayTime()));
         }
         if (type == SoundType.JOIN || type == SoundType.DIMENSION) {
             SOUND_MANAGER.setVolume(TIMBER_HEARTH_INSTANCE, 0.0f);
